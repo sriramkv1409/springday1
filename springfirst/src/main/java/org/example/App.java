@@ -14,7 +14,6 @@ public class App
         ApplicationContext context = new ClassPathXmlApplicationContext("resources.xml");
         Student s = (Student) context.getBean("st");
         s.internship();
-        SpringBoot f = (SpringBoot) context.getBean()
         System.out.println( "Hello World!");
     }
 }
