@@ -26,7 +26,7 @@ public class TodoTaskController {
     }
 
     @GetMapping("/{id}")
-    public TaskModel getTaskById(@PathVariable Long id){
+    public TaskModel getTaskById(@PathVariable int id){
         return tts.getTaskById(id);
     }
 
@@ -36,7 +36,7 @@ public class TodoTaskController {
     }
 
     @DeleteMapping("{id}")
-    public String deleteTask(@PathVariable Long id){
+    public String deleteTask(@PathVariable int id){
         return tts.deleteTask(id);
     }
 
