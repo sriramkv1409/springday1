@@ -17,8 +17,7 @@ public class HelloWorldController {
 
     @PostMapping
     public String addEmployee(@RequestBody Employee e){
-        hws.addEmployee(e);
-        return "Employee Added Successfully";
+        return hws.addEmployee(e);
     }
 
     @GetMapping
@@ -34,7 +33,6 @@ public class HelloWorldController {
     @DeleteMapping("/{eid}")
     public String deleteEmployee(@PathVariable int eid){
         return hws.deleteEmployeeById(eid);
-
     }
 
     @PutMapping("/{eid}")
