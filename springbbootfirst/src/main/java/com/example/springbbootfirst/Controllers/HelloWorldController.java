@@ -30,9 +30,19 @@ public class HelloWorldController {
         return hws.getEmployeeById(eid);
     }
 
+    @GetMapping("/job/{job}")
+    public Employee getEmployeeByJob(@PathVariable String job){
+        return hws.getEmployeeByJob(job);
+    }
+
     @DeleteMapping("/{eid}")
     public String deleteEmployee(@PathVariable int eid){
         return hws.deleteEmployeeById(eid);
+    }
+
+    @DeleteMapping
+    public String deleteAllEmployee(){
+        return hws.deleteAllEmployee();
     }
 
     @PutMapping("/{eid}")

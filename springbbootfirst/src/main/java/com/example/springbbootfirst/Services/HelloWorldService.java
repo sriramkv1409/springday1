@@ -27,6 +27,10 @@ public String addEmployee(Employee employee) {
        return employee.orElse(null);
     }
 
+    public Employee getEmployeeByJob(String job){
+       return employeeRepository.findByJob(job);
+    }
+
     public String deleteEmployeeById(int eid) {
           if(employeeRepository.existsById(eid)){
               employeeRepository.deleteById(eid);
@@ -35,6 +39,16 @@ public String addEmployee(Employee employee) {
           else{
               return "Employee not found";
           }
+    }
+
+    public String deleteAllEmployee(){
+    if(!employeeRepository.findAll().isEmpty()){
+        employeeRepository.deleteAll();
+        return "Employee data deleted Successfully";
+    }
+    else{
+        return "Employee data is empty";
+    }
     }
 
     public String updateRecord(Employee employee){
