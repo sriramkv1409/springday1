@@ -25,6 +25,11 @@ public class HelloWorldController {
         return hws.getAllEmployees();
     }
 
+    @GetMapping("/")
+    public String sample(){
+        return "Welcome to SPRING-BOOT Security";
+    }
+
     @GetMapping("/{eid}")
     public Employee getEmployeeById(@PathVariable int eid){
         return hws.getEmployeeById(eid);
