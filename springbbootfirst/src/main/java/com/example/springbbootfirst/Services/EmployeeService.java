@@ -3,6 +3,7 @@ package com.example.springbbootfirst.Services;
 import com.example.springbbootfirst.Models.EmployeeRoleDTO;
 import com.example.springbbootfirst.Models.RegisterDetails;
 import com.example.springbbootfirst.Models.Roles;
+import com.example.springbbootfirst.Models.UserDetailsDto;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import com.example.springbbootfirst.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +56,20 @@ public class EmployeeService {
     }
     }
 
-    public String updateRecord(RegisterDetails employee){
-        if(details.existsById(employee.getEmpId())){
-            details.save(employee);
-            return "Employee updated Successfully";
+    public String updateRecord(int empId, UserDetailsDto dto){
+        Optional<RegisterDetails> employee = details.findById(empId);
+        if(employee.isEmpty()){
+            return "Employee Not Found";
         }
-        else{
-            return "Employee not found";
-        }
+        RegisterDetails updated = employee.get();
+
+        updated.setName(dto.getName());
+        updated.setEmail(dto.getEmail());
+        updated.setPassword(dto.getPassword());
+        updated.setUserName(dto.getUserName());
+
+        details.save(updated);
+        return "Employee Updated Successfuly";
     }
 
 }

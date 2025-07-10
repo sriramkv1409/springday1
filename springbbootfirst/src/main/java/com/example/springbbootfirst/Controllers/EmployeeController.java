@@ -63,8 +63,8 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/employee/{empId}")
-    public String updateRecord(@RequestBody RegisterDetails employee){
-        return employeeService.updateRecord(employee);
+    public String updateRecord(@PathVariable int empId,@RequestBody UserDetailsDto updateDetails){
+        return employeeService.updateRecord(empId,updateDetails);
     }
 
 
