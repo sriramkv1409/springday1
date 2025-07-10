@@ -1,9 +1,6 @@
 package com.example.springbbootfirst.Controllers;
 
-import com.example.springbbootfirst.Models.EmployeeRoleDTO;
-import com.example.springbbootfirst.Models.RegisterDetails;
-import com.example.springbbootfirst.Models.Roles;
-import com.example.springbbootfirst.Models.UserDetailsDto;
+import com.example.springbbootfirst.Models.*;
 import com.example.springbbootfirst.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +16,19 @@ public class EmployeeController {
     //Service layer
     @Autowired
     private EmployeeService employeeService;
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/employee/{empId}/task")
+    public Task assignTask(@PathVariable int empId,@RequestBody Task task){
+        return employeeService.assignTask(empId,task);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("employee/{empId}/tasks")
+    public List<Task> getTasks(@PathVariable int empId){
+        return  employeeService.getTasksForEmployee(empId);
+    }
+
 
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
