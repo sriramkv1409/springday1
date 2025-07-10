@@ -1,13 +1,19 @@
 package com.example.springbbootfirst.Services;
 
 import com.example.springbbootfirst.Models.RegisterDetails;
+import com.example.springbbootfirst.Models.Roles;
+import com.example.springbbootfirst.Models.UserDetailsDto;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
+import com.example.springbbootfirst.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AuthService {
@@ -16,20 +22,29 @@ public class AuthService {
     RegisterDetailsRepository registerDetailsRepository;
 
     @Autowired
+    RolesRepository rolesRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
-    public String addNewEmployee(RegisterDetails registerDetails){
+    public String addNewEmployee(UserDetailsDto register){
 
-        System.out.println("Saving: " + registerDetails);
-        registerDetails.setPassword(passwordEncoder.encode(registerDetails.getPassword())); //hashing the pass
-        RegisterDetails saved =  registerDetailsRepository.save(registerDetails);
-        System.out.println(saved);
+        System.out.println("Saving: " + register);
+        RegisterDetails registerDetails = new RegisterDetails();
+        registerDetails.setEmpId(register.getEmpId());
+        registerDetails.setName(register.getName());
+        registerDetails.setEmail(register.getEmail());
+        registerDetails.setPassword(passwordEncoder.encode(register.getPassword()));
+        registerDetails.setUserName(register.getUserName());
+        Set<Roles> roles = new HashSet<>();
+        for(String roleName:register.getRoleNames()){
+            Roles role = rolesRepository.findByRoleName(roleName).orElse(null);
+            roles.add(role);
+        }
+        registerDetails.setRoles(roles);
+        registerDetailsRepository.save(registerDetails);
         return "Employee Added Successfully";
-    }
-
-    public List<RegisterDetails> getAllDetails() {
-        return registerDetailsRepository.findAll();
     }
 
     public String authenticateUser(String email, String password) {
@@ -43,6 +58,6 @@ public class AuthService {
             return "Invalid password!";
         }
 
-        return "Login successful for: " + user.getEmpname();
+        return "Login successful for: " + user.getName();
     }
 }

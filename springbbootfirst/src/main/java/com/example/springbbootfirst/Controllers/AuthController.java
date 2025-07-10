@@ -2,6 +2,7 @@ package com.example.springbbootfirst.Controllers;
 
 import com.example.springbbootfirst.Models.LoginRequest;
 import com.example.springbbootfirst.Models.RegisterDetails;
+import com.example.springbbootfirst.Models.UserDetailsDto;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import com.example.springbbootfirst.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,8 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-
     @PostMapping("/register")
-    public String addNewUser(@RequestBody RegisterDetails registerDetails){
+    public String addNewUser(@RequestBody UserDetailsDto registerDetails){
         authService.addNewEmployee(registerDetails);
         return "Employee Register Successfully";
     }
@@ -25,11 +25,6 @@ public class AuthController {
     @PostMapping("/login")
     public String Login(@RequestBody LoginRequest loginRequest) {
         return authService.authenticateUser(loginRequest.getEmail(),loginRequest.getPassword());
-    }
-
-    @GetMapping("/userdetails")
-    public List<RegisterDetails> getAllDetails(){
-        return authService.getAllDetails();
     }
 
 }

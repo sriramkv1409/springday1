@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rolId;
+    private int roleId;
     private String roleName;
 }
