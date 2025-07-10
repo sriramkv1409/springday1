@@ -12,20 +12,35 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetails {
+public class RegisterDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int empID;
 
+    @Column(name = "emp_name")
     private String empname;
-
     private String email;
-
     private String password;
-
     private String gender;
 
+    @Column(name = "date_of_birth")
     private LocalDate dob;
+
+    private String role;
+
+    public void setPassword(String encode) {
+        this.password = encode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmpname() {
+        return empname;
+    }
+
+
 }
 

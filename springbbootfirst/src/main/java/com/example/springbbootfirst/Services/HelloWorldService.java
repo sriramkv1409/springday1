@@ -13,10 +13,11 @@ import java.util.Optional;
 public class HelloWorldService {
     @Autowired
     private EmployeeRepository employeeRepository;
-public String addEmployee(Employee employee) {
-    employeeRepository.save(employee);
-    return "Employee Added Successfully!";
-}
+
+    public String addEmployee(Employee employee) {
+        employeeRepository.save(employee);
+        return "Employee Added Successfully!";
+    }
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
