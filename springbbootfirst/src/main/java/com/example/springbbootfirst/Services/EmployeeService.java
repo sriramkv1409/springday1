@@ -1,7 +1,10 @@
 package com.example.springbbootfirst.Services;
 
+import com.example.springbbootfirst.Models.EmployeeRoleDTO;
 import com.example.springbbootfirst.Models.RegisterDetails;
+import com.example.springbbootfirst.Models.Roles;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
+import com.example.springbbootfirst.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class EmployeeService {
     @Autowired
     private RegisterDetailsRepository details;
 
+    @Autowired
+    private RolesRepository rolesRepository;
+
     public List<RegisterDetails> getAllEmployees() {
         return details.findAll();
     }
@@ -22,6 +28,10 @@ public class EmployeeService {
     public RegisterDetails getEmployeeById(int empId){
        Optional<RegisterDetails> employee = details.findById(empId);
        return employee.orElse(null);
+    }
+
+    public List<EmployeeRoleDTO> getEmployeeByRole(String roleName){
+        return details.findEmployeeNamesByRoleName(roleName);
     }
 
 

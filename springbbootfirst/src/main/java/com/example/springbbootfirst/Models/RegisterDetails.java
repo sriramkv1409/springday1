@@ -30,18 +30,6 @@ public class RegisterDetails {
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "roleId"))
     private Set<Roles> roles;
 
-    public void setPassword(String encode) {
-        this.password = encode;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 
 }
 

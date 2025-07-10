@@ -1,6 +1,8 @@
 package com.example.springbbootfirst.Controllers;
 
+import com.example.springbbootfirst.Models.EmployeeRoleDTO;
 import com.example.springbbootfirst.Models.RegisterDetails;
+import com.example.springbbootfirst.Models.Roles;
 import com.example.springbbootfirst.Models.UserDetailsDto;
 import com.example.springbbootfirst.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 //@RequestMapping("/employee")
@@ -20,7 +24,7 @@ public class EmployeeController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/")
     public String sample(){
-        return "Welcome to SPRING-BOOT Security";
+        return "Welcome to SPRING-BOOT Security Features";
     }
 
 
@@ -33,8 +37,14 @@ public class EmployeeController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/employee/{empId}")
-    public RegisterDetails getEmployeeById(@PathVariable int empId){
+    public RegisterDetails getEmployeeById(@PathVariable int empId) {
         return employeeService.getEmployeeById(empId);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/employee/role/{roleName}")
+    public List<EmployeeRoleDTO> getEmployeeByRole(@PathVariable String roleName){
+        return employeeService.getEmployeeByRole(roleName);
     }
 
 
