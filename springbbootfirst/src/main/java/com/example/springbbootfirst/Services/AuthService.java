@@ -1,11 +1,16 @@
 package com.example.springbbootfirst.Services;
 
+import com.example.springbbootfirst.Models.LoginRequest;
 import com.example.springbbootfirst.Models.RegisterDetails;
 import com.example.springbbootfirst.Models.Roles;
 import com.example.springbbootfirst.Models.UserDetailsDto;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import com.example.springbbootfirst.Repository.RolesRepository;
+import com.example.springbbootfirst.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,6 +32,12 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
 
     public String addNewEmployee(UserDetailsDto register){
 
@@ -47,17 +58,28 @@ public class AuthService {
         return "Employee Added Successfully";
     }
 
-    public String authenticateUser(String email, String password) {
-        RegisterDetails user = registerDetailsRepository.findByEmail(email);
+//    public String authenticateUser(String email, String password) {
+//        RegisterDetails user = registerDetailsRepository.findByEmail(email);
+//
+//        if (user == null) {
+//            return "User not found!";
+//        }
+//
+//        if (!passwordEncoder.matches(password, user.getPassword())) {
+//            return "Invalid password!";
+//        }
+//
+//        return "Login successful for: " + user.getName();
+//    }
+public String authenticate( LoginRequest login) {
+    Authentication authentication =
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            login.getUserName(),login.getPassword()));
+    return jwtTokenProvider.generateToken(authentication);
+}
 
-        if (user == null) {
-            return "User not found!";
-        }
-
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            return "Invalid password!";
-        }
-
-        return "Login successful for: " + user.getName();
+    public Optional<RegisterDetails> getUserByUsername(String username){
+        return registerDetailsRepository.findByUserName(username);
     }
 }

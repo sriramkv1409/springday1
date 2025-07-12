@@ -23,8 +23,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String Login(@RequestBody LoginRequest loginRequest) {
-        return authService.authenticateUser(loginRequest.getEmail(),loginRequest.getPassword());
+    public String Login(@RequestBody LoginRequest login) {
+        return authService.authenticate(login);
     }
 
 }

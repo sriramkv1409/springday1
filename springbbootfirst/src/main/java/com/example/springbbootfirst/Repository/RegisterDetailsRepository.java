@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface RegisterDetailsRepository extends JpaRepository<RegisterDetails,Integer> {
@@ -17,4 +18,5 @@ public interface RegisterDetailsRepository extends JpaRepository<RegisterDetails
     List<EmployeeRoleDTO> findEmployeeNamesByRoleName(@Param("roleName") String roleName);
 
 
+    Optional<RegisterDetails> findByUserName(String username);
 }

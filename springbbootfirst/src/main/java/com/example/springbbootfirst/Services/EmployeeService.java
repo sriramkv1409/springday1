@@ -3,7 +3,6 @@ package com.example.springbbootfirst.Services;
 import com.example.springbbootfirst.Models.*;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import com.example.springbbootfirst.Repository.RolesRepository;
-import com.example.springbbootfirst.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +17,6 @@ public class EmployeeService {
 
     @Autowired
     private RolesRepository rolesRepository;
-
-    @Autowired
-    private TaskRepository taskRepository;
-
-    public Task assignTask(int empId, Task task){
-        RegisterDetails employee = details.findById(empId).orElseThrow( ()-> new RuntimeException("Employee not found"));
-        task.setEmployee(employee);
-        return taskRepository.save(task);
-    }
-
-    public List<Task> getTasksForEmployee(int empId){
-        return taskRepository.findByEmployeeEmpId(empId);
-    }
 
     public List<RegisterDetails> getAllEmployees() {
         return details.findAll();

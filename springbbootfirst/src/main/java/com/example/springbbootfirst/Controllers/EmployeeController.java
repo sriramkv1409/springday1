@@ -17,19 +17,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/employee/{empId}/task")
-    public Task assignTask(@PathVariable int empId,@RequestBody Task task){
-        return employeeService.assignTask(empId,task);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("employee/{empId}/tasks")
-    public List<Task> getTasks(@PathVariable int empId){
-        return  employeeService.getTasksForEmployee(empId);
-    }
-
-
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/")
