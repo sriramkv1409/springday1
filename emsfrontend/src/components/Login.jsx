@@ -13,7 +13,7 @@ const Login = () => {
     } catch (e){
         console.log("Login Error", e);
         alert("Invalid Cred")
-    }
+    } 
     console.log("Form Submitted");
   }
   return (

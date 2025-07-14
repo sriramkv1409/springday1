@@ -1,4 +1,4 @@
-package com.example.springbbootfirst.services;
+package com.example.springbbootfirst.Services;
 
 import com.example.springbbootfirst.Models.RegisterDetails;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
