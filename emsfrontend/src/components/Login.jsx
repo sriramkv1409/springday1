@@ -12,7 +12,7 @@ const Login = () => {
         alert("Login Successful")
     } catch (e){
         console.log("Login Error", e);
-        alert("Invalid Cred")
+        alert("Invalid Credentials")
     } 
     console.log("Form Submitted");
   }
