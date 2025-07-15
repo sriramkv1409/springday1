@@ -16,7 +16,7 @@ const Login = () => {
     } 
     console.log("Form Submitted");
   }
-  return (
+  return(
     <div>
       <h2>Login</h2>
       <div>
