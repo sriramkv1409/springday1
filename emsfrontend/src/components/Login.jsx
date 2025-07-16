@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -21,7 +22,7 @@ const Login = () => {
       console.log(request.data.roles);
       console.log(token);
       alert("Login Successful");
-      navigate("/");
+      navigate("/getemployees");
     } catch (e) {
       console.log("Login Error", e);
       alert("Invalid Cred");
@@ -29,6 +30,8 @@ const Login = () => {
     console.log("Form Submitted");
   }
   return (
+    <>
+    <Navbar/>
     <div className="container">
       <br /> <br />
       <div className="row">
@@ -83,6 +86,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default Login;

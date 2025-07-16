@@ -4,14 +4,15 @@ import GetEmployees from "./components/GetEmployees";
 // import AddEmployee from "./components/AddEmployee";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Home from "./components/Home";
+import HomePage from "./components/HomePage";
+
 
 const App = () => (
   <Router>
-    <Navbar/>
     <Routes>
-      <Route path="/" element={<GetEmployees />} />
+      <Route path="/" element={<HomePage />} />
       {/* <Route path="/add" element={<AddEmployee />} /> */}
+      <Route path="/getemployees" element={<GetEmployees/>}/>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Signup />} />
     </Routes>

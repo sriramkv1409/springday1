@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import Navbar from "./Navbar";
 const GetEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const token = localStorage.getItem("token");
@@ -40,6 +40,8 @@ const GetEmployees = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container mt-4">
       <h2>Employee List</h2>
       <table className="table table-bordered">
@@ -75,6 +77,7 @@ const GetEmployees = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

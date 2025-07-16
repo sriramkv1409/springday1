@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import { Link,useNavigate} from "react-router-dom";
 
 
 const Signup = () => {
@@ -9,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [userName, setUsername] = useState("");
   const [roleNames, setRoles] = useState("");
+  const navigate = useNavigate();
   async function addNewEmployee(e) {
     e.preventDefault();
     const roleArray = roleNames.split(",").map((role) => role.trim());
@@ -23,11 +25,14 @@ const Signup = () => {
     console.log(req);
     if (req.data) {
       alert(req.data);
+      navigate('/login');
     } else {
       alert("Error during Sign up");
     }
   }
   return (
+    <>
+    <Navbar/>
     <section>
       <h2>SignUp</h2>
       <div>
@@ -82,6 +87,7 @@ const Signup = () => {
         <p>Already an user??<Link to='/login'>Login</Link></p>
       </div>
     </section>
+    </>
   );
 };
 export default Signup;
