@@ -1,43 +1,21 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import GetEmployees from "./components/GetEmployees";
+// import AddEmployee from "./components/AddEmployee";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Home from "./components/Home";
 
-function App() {
-  return (
-    <Router>
-      <nav style={styles.nav}>
-        <ul style={styles.ul}>
-          <li><Link to="/login" style={styles.link}>Login</Link></li>
-          <li><Link to="/signup" style={styles.link}>Signup</Link></li>
-        </ul>
-      </nav>
-
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<Login />} /> {/* default route */}
-      </Routes>
-    </Router>
-  );
-}
-
-const styles = {
-  nav: {
-    backgroundColor: "#333",
-    padding: "10px"
-  },
-  ul: {
-    display: "flex",
-    listStyle: "none",
-    gap: "20px",
-    margin: 0,
-    padding: 0
-  },
-  link: {
-    color: "white",
-    textDecoration: "none",
-    fontSize: "18px"
-  }
-};
+const App = () => (
+  <Router>
+    <Navbar/>
+    <Routes>
+      <Route path="/" element={<GetEmployees />} />
+      {/* <Route path="/add" element={<AddEmployee />} /> */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Signup />} />
+    </Routes>
+  </Router>
+);
 
 export default App;
