@@ -5,7 +5,7 @@ const GetEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // role is like "ROLE_ADMIN"
-
+  
   useEffect(() => {
     const fetchEmployees = async () => {
       try {

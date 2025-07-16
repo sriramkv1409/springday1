@@ -8,6 +8,7 @@ const Navbar = () => (
         <li className="nav-item"><Link className="nav-link" to="/">Logout</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/add">AddEmployees</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/getemployees">EmployeeList</Link></li>
         {/* <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li> */}
       </ul>
     </div>
