@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
+import Navbar1 from "./Navbar1";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const request = await axios.post("http://localhost:8080/api/auth/login", {
+      const request = await axios.post("https://emsbackend-zur3.onrender.com/api/auth/login", {
         userName,
         password,
       });
@@ -31,7 +31,7 @@ const Login = () => {
   }
   return (
     <>
-    <Navbar/>
+    <Navbar1/>
     <div className="container">
       <br /> <br />
       <div className="row">

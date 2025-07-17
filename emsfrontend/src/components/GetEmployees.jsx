@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 const GetEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role"); // role is like "ROLE_ADMIN"
-  
+  const role = localStorage.getItem("role"); 
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/employee", {
+        const response = await axios.get("https://emsbackend-zur3.onrender.com/employee", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -18,6 +19,7 @@ const GetEmployees = () => {
       } catch (err) {
         console.error("Error fetching employees", err);
         alert("Unauthorized or Error");
+        navigate('/');
       }
     };
 
@@ -26,7 +28,7 @@ const GetEmployees = () => {
 
   const handleDelete = async (empId) => {
     try {
-      await axios.delete(`http://localhost:8080/employee/${empId}`, {
+      await axios.delete(`https://emsbackend-zur3.onrender.com/employee/${empId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +40,10 @@ const GetEmployees = () => {
       alert("Delete failed");
     }
   };
-
+  
+  const handleEdit = (empId) => {
+    navigate(`/edit-employee/${empId}`);
+  };
   return (
     <>
     <Navbar/>
@@ -69,7 +74,9 @@ const GetEmployees = () => {
                       Delete
                     </button>
                   )}
-                  <button className="btn btn-primary btn-sm">Edit</button>
+                  <button 
+                  onClick={()=>handleEdit(emp.empId)} 
+                  className="btn btn-primary btn-sm">Edit</button>
                 </td>
               )}
             </tr>

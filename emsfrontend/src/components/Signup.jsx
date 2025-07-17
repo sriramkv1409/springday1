@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar2 from "./Navbar2";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
     const roleArray = roleNames.split(",").map((role) => role.trim());
     try {
-      const req = await axios.post("http://localhost:8080/api/auth/register", {
+      const req = await axios.post("https://emsbackend-zur3.onrender.com/api/auth/register", {
         name,
         email,
         password,
@@ -36,7 +37,7 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar2 />
       <section className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">

@@ -12,6 +12,13 @@ const AddEmployees = ()=>{
   const [roleNames, setRoles] = useState("");
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+//   useEffect(() => {
+//     if (!token) {
+//       alert("You are not logged in. Please log in to continue.");
+//       navigate('/'); 
+//       return;
+//     }
+//   }, [token, navigate]);
     async function addNewEmployee(e) {
     e.preventDefault();
    if (!token) {
@@ -21,7 +28,7 @@ const AddEmployees = ()=>{
    }
     const roleArray = roleNames.split(",").map((role) => role.trim());
     try {
-      const req = await axios.post("http://localhost:8080/employee/add",
+      const req = await axios.post("https://emsbackend-zur3.onrender.com/employee/add",
     {
         name,
         email,
@@ -48,6 +55,10 @@ const AddEmployees = ()=>{
     } else {
       alert("An error occurred. Please try again.");
     }
+    }
+
+    if (!token) {
+    return null; // or a loading spinner
     }
   }
     return(

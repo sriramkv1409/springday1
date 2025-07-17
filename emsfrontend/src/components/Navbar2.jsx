@@ -1,6 +1,6 @@
 import { Link,useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar2 = () => {
   const navigate = useNavigate();
   const handleLogout = ()=>{
     localStorage.clear(); //removes all the data stored
@@ -13,9 +13,7 @@ const Navbar = () => {
       <Link className="navbar-brand" to="/">EMS</Link>
       <ul className="navbar-nav">
         <li className="nav-item"><Link onClick={handleLogout} className="nav-link" to="/">Logout</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="/add">AddEmployees</Link></li>
         <li className="nav-item"><Link  className="nav-link" to="/login">Login</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="/getemployees">EmployeeList</Link></li>
         {/* <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li> */} 
       </ul>
     </div>
@@ -24,4 +22,4 @@ const Navbar = () => {
   )
 };
 
-export default Navbar;
+export default Navbar2;
